@@ -3,7 +3,7 @@
 # Contributor: ThatOneCalculator <kainoa at t1c dot dev>
 
 pkgname=hyprland-git
-pkgver=0.31.0.r7.a0b675ec
+pkgver=0.31.0.r20.a61eb769
 pkgrel=1
 pkgdesc="A dynamic tiling Wayland compositor based on wlroots that doesn't sacrifice on its looks."
 arch=(x86_64 aarch64)
@@ -64,8 +64,14 @@ source=(
   "git+https://gitlab.freedesktop.org/wlroots/wlroots.git"
   "git+https://github.com/hyprwm/hyprland-protocols.git"
   "git+https://github.com/canihavesomecoffee/udis86.git"
-  "git+https://github.com/wolfpld/tracy.git")
+  "git+https://github.com/wolfpld/tracy.git"
+  "DisplaylinkPatch2.patch"
+  "DisplayLink.patch"
+)
+
 b2sums=(
+  'SKIP'
+  'SKIP'
   'SKIP'
   'SKIP'
   'SKIP'
@@ -93,6 +99,8 @@ prepare() {
 
   git -C subprojects/wlroots reset --hard
   patch -d subprojects/wlroots -Np1 < subprojects/packagefiles/wlroots-meson-build.patch
+  patch -d subprojects/wlroots --strip=1 --ignore-whitespace --input="$srcdir/DisplaylinkPatch2.patch"
+  patch -d subprojects/wlroots --strip=1 --ignore-whitespace --input="$srcdir/DisplayLink.patch"
 }
 
 pkgver() {

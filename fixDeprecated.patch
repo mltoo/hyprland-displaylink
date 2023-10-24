@@ -1,0 +1,12 @@
+diff --unified --recursive --text wlroots-0.16.2.orig/examples/dmabuf-capture.c wlroots-0.16.2.new/examples/dmabuf-capture.c
+--- wlroots-0.16.2.orig/examples/dmabuf-capture.c	2023-08-25 13:52:30.395792483 +0100
++++ wlroots-0.16.2.new/examples/dmabuf-capture.c	2023-08-25 13:53:24.113398418 +0100
+@@ -521,7 +521,7 @@
+ 		};
+ 
+ 		av_log(ctx, AV_LOG_INFO, "Encoded frame %i (%i in queue)\n",
+-				ctx->avctx->frame_number, get_fifo_size(&ctx->vid_frames));
++				(int)ctx->avctx->frame_num, get_fifo_size(&ctx->vid_frames));
+ 
+ 	} while (!ctx->err);
+ 
